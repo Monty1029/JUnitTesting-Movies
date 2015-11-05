@@ -1,28 +1,44 @@
 import junit.framework.TestCase;
 
 public class TestMovieList extends TestCase {
+	private MovieList movieList = null;
+	private Movie starWars = null;
+	private Movie starTrek = null;
+	private Movie stargate = null;
+
+	protected void setUp() {
+		movieList = new MovieList();
+		starWars = new Movie("Star Wars");
+		starTrek = new Movie("Star Trek");
+		stargate = new Movie("StarGate");
+	}
+
 	public void testEmptyListSize() {
-		MovieList emptyList = new MovieList();
 		assertEquals("Size of empty movie list should be 0.", 0,
-				emptyList.size());
+				movieList.size());
 	}
 
 	public void testSizeAfterAddingOne() {
-		Movie starWars = new Movie("Star Wars");
-		MovieList oneItemList = new MovieList();
-		oneItemList.add(starWars);
-		assertEquals("Size of one item list should be 1.", 1,
-				oneItemList.size());
+		movieList.add(starWars);
+		assertEquals("Size of one item list should be 1.", 1, movieList.size());
 	}
 
 	public void testSizeAfterAddingTwo() {
-		Movie starWars = new Movie("Star Wars");
-		Movie starTrek = new Movie("Star Trek");
-		MovieList twoItemList = new MovieList();
-		twoItemList.add(starWars);
-		twoItemList.add(starTrek);
+		movieList.add(starWars);
+		movieList.add(starTrek);
 		assertEquals("Size of a two item list should be 2.", 2,
-				twoItemList.size());
+				movieList.size());
+	}
+
+	public void testContents() {
+		movieList.add(starWars);
+		movieList.add(starTrek);
+		assertTrue("List should contain starWars.",
+				movieList.contains(starWars));
+		assertTrue("List should contain starTrek.",
+				movieList.contains(starTrek));
+		assertFalse("List should not contain stargate.",
+				movieList.contains(stargate));
 	}
 
 	public static void main(String[] args) {
